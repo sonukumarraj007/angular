@@ -266,3 +266,56 @@ Full Name value : {{ employeeForm.get('fullName').value }}
 
 ```
  
+
+
+```ts
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+
+export class UserService {
+
+  apiURL = 'http://localhost:2020';
+
+  constructor(private http: HttpClient) { }
+
+  getUsers(): Observable<User> {
+    return this.http.get<User>(this.apiURL + '/user')
+  }
+
+  getUser(id): Observable<User> {
+    return this.http.get<User>(this.apiURL + '/user/' + id)
+  }
+
+  createUser(user): Observable<User> {
+    return this.http.post<User>(this.apiURL + '/user', JSON.stringify(user))
+  }
+
+  updateUser(id, user): Observable<User> {
+    return this.http.put<User>(this.apiURL + '/user/' + id, JSON.stringify(user))
+  }
+
+  deleteUser(id) {
+    return this.http.delete<User>(this.apiURL + '/user/' + id);
+  }
+
+}
+
+```
+
+Calling services in component 
+
+```ts
+ constructor(public userApi: UserService) { }
+
+ngOnInit() {
+    this.userApi.getUsers().subscribe((data: any) => {
+      this.users = data;
+    });
+  }
+
+```
