@@ -106,6 +106,9 @@ Angular executes an impure pipe during every component change detection cycle. A
 
 With that concern in mind, implement an impure pipe with great care. An expensive, long-running pipe could destroy the user experience.
 
+
+<hr>
+
 ## 1. @Inject() and @Injectable
 
 ### @Inject()
