@@ -1,4 +1,4 @@
-- #### [Angular Interview Question](/interview-question.md.md)
+- #### [Angular Interview Question](/interview-question.md)
 - #### [Angular Short Notes](/short-notes.md)
 
 
