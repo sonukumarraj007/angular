@@ -319,3 +319,146 @@ ngOnInit() {
   }
 
 ```
+
+
+### RxJS
+
+RxJS is a powerful library for reactive programming using Observables, and Angular often utilizes RxJS operators to handle asynchronous data streams. Here are some useful RxJS operators that you might find helpful:
+
+***1. map:*** Transforms items emitted by an Observable by applying a function to each item.
+
+```ts
+
+import { map } from 'rxjs/operators';
+
+observable.pipe(
+  map(value => value * 2)
+);
+
+
+```
+
+***2. filter:*** Filters items emitted by an Observable by only emitting those that satisfy a specified condition.
+
+```ts
+
+import { filter } from 'rxjs/operators';
+
+observable.pipe(
+  filter(value => value > 10)
+);
+
+
+```
+
+***3. mergeMap (or flatMap):** Projects each source value to an Observable which is merged in the output Observable.
+
+```ts
+
+import { mergeMap } from 'rxjs/operators';
+
+observable.pipe(
+  mergeMap(value => http.get(`/api/data/${value}`))
+);
+
+```
+
+***4. switchMap:*** Maps each value to an Observable and subscribes to it, cancelling any previous subscriptions.
+
+```ts
+
+import { switchMap } from 'rxjs/operators';
+
+observable.pipe(
+  switchMap(value => http.get(`/api/data/${value}`))
+);
+
+```
+
+***5. concatMap:*** Maps each value to an Observable and subscribes to them sequentially.
+
+```ts
+
+import { concatMap } from 'rxjs/operators';
+
+observable.pipe(
+  concatMap(value => http.get(`/api/data/${value}`))
+);
+
+```
+
+***6. debounceTime:*** Delays the emissions of the Observable by a given time span.
+
+```ts
+
+import { debounceTime } from 'rxjs/operators';
+
+observable.pipe(
+  debounceTime(300)
+);
+
+```
+
+***7. distinctUntilChanged:*** Only emits when the current value is different from the last emitted value.
+
+```ts
+
+import { distinctUntilChanged } from 'rxjs/operators';
+
+observable.pipe(
+  distinctUntilChanged()
+);
+
+```
+
+***8. tap:*** Allows you to perform side effects for notifications emitted by the Observable.
+
+```ts
+
+import { tap } from 'rxjs/operators';
+
+observable.pipe(
+  tap(value => console.log(value))
+);
+
+
+```
+
+***9. catchError:*** Catches errors on the source Observable and allows you to return a new Observable or throw an error.
+
+```ts
+import { catchError } from 'rxjs/operators';
+
+observable.pipe(
+  catchError(error => {
+    console.error(error);
+    return of([]); // Return a default value or an empty Observable
+  })
+);
+
+
+```
+
+***10. retry:** Retries the source Observable a specified number of times if it fails.
+
+```ts
+
+import { retry } from 'rxjs/operators';
+
+observable.pipe(
+  retry(3)
+);
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
