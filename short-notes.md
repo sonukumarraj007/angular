@@ -453,12 +453,84 @@ observable.pipe(
 ```
 
 
+### Reactive Form
 
 
+```ts
+
+import { ReactiveFormsModule } from '@angular/forms';
+
+@NgModule({
+  imports: [
+    ReactiveFormsModule
+  ]
+})
+export class AppModule { }
+
+```
+
+#### Create a FormGroup:
+
+```ts
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+
+@Component({
+  selector: 'app-my-form',
+  templateUrl: './my-form.component.html'
+})
+export class MyFormComponent implements OnInit {
+  myForm: FormGroup;
+
+  ngOnInit() {
+    this.myForm = new FormGroup({
+      name: new FormControl(''),
+      email: new FormControl('')
+    });
+  }
+
+  // Method to set form values
+  setFormValues() {
+    this.myForm.setValue({
+      name: 'John Doe',
+      email: 'john.doe@example.com'
+    });
+  }
+
+  // Method to patch form values
+  patchFormValues() {
+    this.myForm.patchValue({
+      name: 'Jane Doe'
+    });
+  }
+
+  // Method to get form control values
+  getFormValues() {
+    const name = this.myForm.get('name')?.value;
+    const email = this.myForm.get('email')?.value;
+    console.log('Name:', name);
+    console.log('Email:', email);
+  }
+}
 
 
+```
+
+```ts
+<form [formGroup]="myForm">
+  <label for="name">Name:</label>
+  <input id="name" formControlName="name">
+  
+  <label for="email">Email:</label>
+  <input id="email" formControlName="email">
+  
+  <button (click)="setFormValues()">Set Values</button>
+  <button (click)="patchFormValues()">Patch Values</button>
+  <button (click)="getFormValues()">Get Values</button>
+</form>
 
 
+```
 
 
 
